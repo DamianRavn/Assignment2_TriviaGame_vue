@@ -15,7 +15,7 @@ const store = createStore
             username: 'user1',
             numberOfQuestions: 1,
             currentDifficulty: '',
-            currentCatagory: 0,
+            currentCatagory: '',
         },
         quizData:
         {

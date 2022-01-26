@@ -5,6 +5,7 @@ import { ref, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 
+//https://trusting-fermi-72517c.netlify.app/
 const apiURL = "https://experis-assignment-api.herokuapp.com";
 const apiKey = "floppy-vitamin-cloud";
 
@@ -51,7 +52,7 @@ const router = useRouter();
 const username = ref("");
 const questionAmount = ref(0);
 const currentDifficulty = ref(difficulties.value[0]);
-const currentCatagory = ref(-1);
+const currentCatagory = ref("");
 
 //Submit used loosely i guess. No post or get made
 const submitForm = (e) => {
@@ -62,6 +63,7 @@ const submitForm = (e) => {
     e.target.nodeName == "BUTTON"
   ) {
     if (validateInput()) {
+        console.log(currentCatagory.value);
       store.commit("setUserData", {
         username: username.value,
         numberOfQuestions: questionAmount.value,
@@ -93,13 +95,16 @@ function validateInput() {
 }
 
 const categoriesLoaded = () => {
-  const id = catagories.value[0].id;
+  const id = catagories.value[0].id.toString();
   currentCatagory.value = id;
   fetchMaxQuestions(id);
   return true;
 };
 const changeCategory = (e) => {
-  fetchMaxQuestions(e.target.value);
+    const id = e.target.value;
+    currentCatagory.value = id;
+    console.log(currentCatagory.value);
+  fetchMaxQuestions(id);
 };
 const fetchMaxQuestions = (catagoryID) => {
   store.dispatch("fetchMaxQuestions", catagoryID);
@@ -148,11 +153,9 @@ const fetchMaxQuestions = (catagoryID) => {
       ><br />
 
       <!-- Catagories have to be fetched first, hence the if else -->
-      <div v-if="catagories.length > 0 && categoriesLoaded()">
-        <!-- this works because of the way js evaluates && statements  -->
+      <div v-if="catagories.length > 0">
         <label for="catagories">Select Catagory:</label><br />
         <select
-          @readystatechange="changeCategory"
           @change="changeCategory"
           v-model="currentCatagory"
           name="Choose Catagory"
