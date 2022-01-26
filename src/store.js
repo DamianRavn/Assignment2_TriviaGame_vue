@@ -61,7 +61,8 @@ const store = createStore
         },
         setAnswerData: (state, payload) =>
         {
-            state.quizData.answerData = payload;
+            state.quizData.answerData.userAnswer.push(payload.userAnswer);
+            state.quizData.answerData.correctAnswer.push(payload.correctAnswer);
         },
 
     },
