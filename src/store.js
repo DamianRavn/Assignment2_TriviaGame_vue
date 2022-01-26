@@ -12,7 +12,7 @@ const store = createStore
         },
         userData:
         {
-            username: 'user1',
+            username: '',
             numberOfQuestions: 1,
             currentDifficulty: '',
             currentCatagory: '',
@@ -22,13 +22,17 @@ const store = createStore
             quiz: [],
             numberOfAnswers: 0,
             numberOfCorrectAnswers: 0,
-            answerData:
-            {
-                userAnswer: [],
-                correctAnswer: []
-            }
+            answerData:[]
         }
         
+    },
+    getters: 
+    {
+        getAllQuizQuestionsRandom: (state) =>
+        {
+            const tmp = [...state.quizData.quiz.results[state.quizData.numberOfAnswers].incorrect_answers, state.quizData.quiz.results[state.quizData.numberOfAnswers].correct_answer];
+            return tmp.sort((a, b) => 0.5 - Math.random());
+        }
     },
     mutations:
     {
@@ -61,8 +65,7 @@ const store = createStore
         },
         setAnswerData: (state, payload) =>
         {
-            state.quizData.answerData.userAnswer.push(payload.userAnswer);
-            state.quizData.answerData.correctAnswer.push(payload.correctAnswer);
+            state.quizData.answerData.push(payload);
         },
 
     },
@@ -75,7 +78,7 @@ const store = createStore
             const data = await res.json();
             const catagories = data.trivia_categories;
             commit('setStartPageCatagories', catagories);
-            callback(catagories);
+            callback();
         },
         async fetchMaxQuestions({ commit }, categoryID)
         {
@@ -107,7 +110,6 @@ const store = createStore
                     throw Error("No data");
                 }
                 const quiz = await data.json();
-                console.log(quiz)
                 commit('setQuizFetchData', quiz)
             } 
             catch (err) 

@@ -18,7 +18,7 @@ fetch(`${apiURL}/trivia`, {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ 
-            username: 'test', 
+            username: store.state.userData.username, 
             highScore: 0 
         })
     })
@@ -63,7 +63,6 @@ const submitForm = (e) => {
     e.target.nodeName == "BUTTON"
   ) {
     if (validateInput()) {
-        console.log(currentCatagory.value);
       store.commit("setUserData", {
         username: username.value,
         numberOfQuestions: questionAmount.value,
@@ -104,7 +103,6 @@ const categoriesInit = () => {
 const changeCategory = (e) => {
     const id = e.target.value;
     currentCatagory.value = id;
-    console.log(currentCatagory.value);
   fetchMaxQuestions(id);
 };
 const fetchMaxQuestions = (catagoryID) => {
