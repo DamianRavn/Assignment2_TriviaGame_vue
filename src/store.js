@@ -69,12 +69,13 @@ const store = createStore
     actions:
     {
         //Startpage actions
-        async fetchCatagories({ commit })
+        async fetchCatagories({ commit }, callback)
         {
             const res = await fetch('https://opentdb.com/api_category.php');
             const data = await res.json();
             const catagories = data.trivia_categories;
             commit('setStartPageCatagories', catagories);
+            callback(catagories);
         },
         async fetchMaxQuestions({ commit }, categoryID)
         {

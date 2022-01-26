@@ -39,7 +39,7 @@ fetch(`${apiURL}/trivia`, {
 
 const store = useStore();
 //Action because its async call
-onMounted(() => store.dispatch("fetchCatagories"));
+onMounted(() => store.dispatch("fetchCatagories", catagoeriesHaveBeenLoaded));
 
 //Getting data from state
 const difficulties = computed(()=> store.state.startPageData.difficulties);
@@ -94,11 +94,12 @@ function validateInput() {
   return true;
 }
 
-const categoriesLoaded = () => {
+//When the catagories have been loaded, set the currentCatagory so that the selector shows a default value
+const catagoeriesHaveBeenLoaded = ()=> categoriesInit();
+const categoriesInit = () => {
   const id = catagories.value[0].id.toString();
   currentCatagory.value = id;
   fetchMaxQuestions(id);
-  return true;
 };
 const changeCategory = (e) => {
     const id = e.target.value;
