@@ -32,6 +32,10 @@ const store = createStore
         {
             const tmp = [...state.quizData.quiz.results[state.quizData.numberOfAnswers].incorrect_answers, state.quizData.quiz.results[state.quizData.numberOfAnswers].correct_answer];
             return tmp.sort((a, b) => 0.5 - Math.random());
+        },
+        getHighscore: (state) =>
+        {
+            return state.quizData.numberOfCorrectAnswers * 10;
         }
     },
     mutations:

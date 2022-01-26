@@ -37,7 +37,8 @@ export default {
       store.commit('setAnswerData', 
             {
               userAnswer: userAnswer,
-              correctAnswer: correctAnswer
+              correctAnswer: correctAnswer,
+              question: quiz.value.results[numberOfAnswers.value].question,
             });
       if (correctAnswer == userAnswer)
       {
