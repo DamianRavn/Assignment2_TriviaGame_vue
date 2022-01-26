@@ -22,6 +22,11 @@ const store = createStore
             quiz: [],
             numberOfAnswers: 0,
             numberOfCorrectAnswers: 0,
+            answerData:
+            {
+                userAnswer: [],
+                correctAnswer: []
+            }
         }
         
     },
@@ -53,6 +58,10 @@ const store = createStore
         setNumberOfCorrectAnswers: (state, payload) =>
         {
             state.quizData.numberOfCorrectAnswers = payload;
+        },
+        setAnswerData: (state, payload) =>
+        {
+            state.quizData.answerData = payload;
         },
 
     },

@@ -33,6 +33,11 @@ export default {
     //Checks if the answer is correct and increases the numberofAnswers and numberOfCorrectAnswers vars
     function evaluateAnswer(correctAnswer = "", userAnswer = "")
     {
+      store.commit('setAnswerData', 
+            {
+              userAnswer: userAnswer,
+              correctAnswer: correctAnswer
+            });
       if (correctAnswer == userAnswer)
       {
         alert("correct");
