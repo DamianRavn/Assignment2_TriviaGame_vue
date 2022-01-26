@@ -30,7 +30,7 @@ Contact [@DamianRavn](https://github.com/DamianRavn) or [@livstella](https://git
 ## Authors
 
 * [@DamianRavn](https://github.com/DamianRavn)
-* [@livstella](https://github.com/livstella)
+* [@livReinhold](https://github.com/livstella)
 
 ## License
 
