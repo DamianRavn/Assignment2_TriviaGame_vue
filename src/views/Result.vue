@@ -1,6 +1,7 @@
 <script>
 import { ref } from "vue";
 import store from "../store";
+import router from "../router";
 export default {
   setup() {
     const error = ref(null);
@@ -12,6 +13,11 @@ export default {
     const apiKey = "floppy-vitamin-cloud";
     const userCurrentHighScore = ref(0);
     const highScoreText = ref("");
+
+    const toStartScreen = ()=>
+    {
+      router.push({name:"Home"});
+    }
 
     ///Fetches data on the user. Could potentially be updated from store
 
@@ -58,7 +64,7 @@ export default {
     userData();
     updateHighScore()
 
-    return { points, userCurrentHighScore, quizAnswers};
+    return { points, userCurrentHighScore, quizAnswers, toStartScreen};
   },
 };
 </script>
@@ -81,6 +87,7 @@ export default {
       <br />
     </li>
   </ul>
+  <button @click="toStartScreen">Back to Start Screen!</button>
 </template>
 
 <style>
